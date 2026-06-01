@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Asset Production Studio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header-title h1 { margin: 0; color: #00A859; font-size: 2.5rem; }
+        .header-title p { color: #94a3b8; margin-top: 10px; }
+        .studio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .asset-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .asset-card h3 { margin-top: 0; margin-bottom: 5px; color: #f1f5f9; width: 100%; text-align: left; }
+        .asset-card p { color: #94a3b8; font-size: 0.9rem; margin-top: 0; margin-bottom: 15px; width: 100%; text-align: left; }
+        canvas {
+            background: #000;
+            border-radius: 6px;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #475569;
+            margin-bottom: 20px;
+        }
+        .btn-download {
+            background: #0077B6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-download:hover { background: #0096c7; }
+        .btn-all {
+            background: #00A859;
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 14px rgba(0, 168, 89, 0.4);
+            transition: transform 0.2s;
+        }
+        .btn-all:hover { background: #00944e; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <div class="header-title">
+        <h1>Portfolio Image Asset Studio</h1>
+        <p>Generate, render, and download pixel-perfect graphics for your portfolio directories.</p>
+    </div>
+
+    <button class="btn-all" id="downloadAllBtn">Download All 5 Assets Automatically</button>
+
+    <div class="studio-grid">
+        <!-- BANNER -->
+        <div class="asset-card">
+            <div>
+                <h3>1. banner.jpg</h3>
+                <p>1920x1080 | Technical Blueprint Background</p>
+            </div>
+            <canvas id="canvas-banner" width="1920" height="1080" style="aspect-ratio: 16/9;"></canvas>
+            <button class="btn-download" onclick="downloadSingle('canvas-banner', 'banner.jpg')">Download banner.jpg</button>
+        </div>
+
+        <!-- CALENDAR -->
+        <div class="asset-card">
+            <div>
+                <h3>2. calendar.jpg</h3>
+                <p>800x533 | Publication & Grid Design Layout</p>
+            </div>
+            <canvas id="canvas-calendar" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
+            <button class="btn-download" onclick="downloadSingle('canvas-calendar', 'calendar.jpg')">Download calendar.jpg</button>
+        </div>
+
+        <!-- BILLBOARD -->
+        <div class="asset-card">
+            <div>
+                <h3>3. billboard.jpg</h3>
+                <p>800x533 | Large-Format Scale Exhibition Graphic</p>
+            </div>
+            <canvas id="canvas-billboard" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
+            <button class="btn-download" onclick="downloadSingle('canvas-billboard', 'billboard.jpg')">Download billboard.jpg</button>
+        </div>
+
+        <!-- LOGO PROJECT -->
+        <div class="asset-card">
+            <div>
+                <h3>4. logo-project.jpg</h3>
+                <p>800x533 | Scalable Brand Geometry Manual</p>
+            </div>
+            <canvas id="canvas-logo" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
+            <button class="btn-download" onclick="downloadSingle('canvas-logo', 'logo-project.jpg')">Download logo-project.jpg</button>
+        </div>
+
+        <!-- SOCIAL MEDIA -->
+        <div class="asset-card">
+            <div>
+                <h3>5. social-media.jpg</h3>
+                <p>800x533 | High-Contrast Digital Ad Vector Layout</p>
+            </div>
+            <canvas id="canvas-social" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
+            <button class="btn-download" onclick="downloadSingle('canvas-social', 'social-media.jpg')">Download social-media.jpg</button>
+        </div>
+    </div>
+
+    <script>
+        // Setup all canvases
+        const canvasBanner = document.getElementById('canvas-banner').getContext('2d');
+        const canvasCalendar = document.getElementById('canvas-calendar').getContext('2d');
+        const canvasBillboard = document.getElementById('canvas-billboard').getContext('2d');
+        const canvasLogo = document.getElementById('canvas-logo').getContext('2d');
+        const canvasSocial = document.getElementById('canvas-social').getContext('2d');
+
+        // =====================================================================
+        // RENDER 1: BANNER BACKGROUND (1920x1080)
+        // =====================================================================
+        let ctx = canvasBanner;
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, 1920, 1080);
+        ctx.strokeStyle = 'rgba(0, 119, 182, 0.08)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < 1920; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1080); ctx.stroke(); }
+        for (let y = 0; y < 1080; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1920, y); ctx.stroke(); }
+        ctx.strokeStyle = 'rgba(0, 168, 89, 0.15)';
+        ctx.strokeRect(60, 60, 200, 200);
+        ctx.strokeRect(1920 - 260, 1080 - 260, 200, 200);
+        function cross(x,y) {
+            ctx.strokeStyle = 'rgba(0, 168, 89, 0.3)';
+            ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI*2); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x-20, y); ctx.lineTo(x+20, y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x, y-20); ctx.lineTo(x, y+20); ctx.stroke();
+        }
+        cross(300, 250); cross(1600, 800); cross(200, 850); cross(1700, 200);
+
+        // =====================================================================
+        // RENDER 2: CALENDAR DESIGN (800x533)
+        // =====================================================================
+        ctx = canvasCalendar;
+        ctx.fillStyle = '#1e293b'; ctx.fillRect(0, 0, 800, 533);
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(40, 40, 720, 453);
+        ctx.fillStyle = '#00A859'; ctx.fillRect(40, 40, 720, 80);
+        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 24px Arial'; ctx.fillText('ACADEMIC CALENDAR & LAYOUT SCHEDULE', 70, 90);
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
+        for(let i=0; i<6; i++) {
+            for(let j=0; j<4; j++) {
+                ctx.fillStyle = '#1e293b'; ctx.fillRect(70 + (i*110), 150 + (j*75), 95, 60);
+                ctx.fillStyle = 'rgba(148, 163, 184, 0.2)'; ctx.fillRect(75 + (i*110), 155 + (j*75), 40, 12);
+            }
+        }
+        ctx.fillStyle = 'rgba(0, 119, 182, 0.4)'; ctx.fillRect(70, 400, 660, 40);
+
+        // =====================================================================
+        // RENDER 3: BILLBOARD EXHIBITION (800x533)
+        // =====================================================================
+        ctx = canvasBillboard;
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(0, 0, 800, 533);
+        let grad = ctx.createLinearGradient(0, 0, 800, 0); grad.addColorStop(0, '#0077B6'); grad.addColorStop(1, '#00A859');
+        ctx.fillStyle = grad; ctx.fillRect(100, 100, 600, 300);
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.6)'; ctx.fillRect(100, 100, 600, 300);
+        ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 3; ctx.strokeRect(130, 130, 540, 240);
+        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 36px Arial'; ctx.fillText('LARGE-FORMAT EXHIBITION', 160, 220);
+        ctx.font = '20px Arial'; ctx.fillStyle = '#cbd5e1'; ctx.fillText('Error-Free Printing • High-Resolution Geometry Vector Scaling', 160, 270);
+        ctx.fillStyle = '#334155'; ctx.fillRect(80, 400, 640, 20); ctx.fillRect(200, 420, 40, 80); ctx.fillRect(560, 420, 40, 80);
+
+        // =====================================================================
+        // RENDER 4: LOGO PRODUCTION HANDBOOK (800x533)
+        // =====================================================================
+        ctx = canvasLogo;
+        ctx.fillStyle = '#111827'; ctx.fillRect(0, 0, 800, 533);
+        ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+        for (let i = 0; i < 800; i += 20) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 533); ctx.stroke(); }
+        ctx.strokeStyle = '#00A859'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(400, 240, 100, 0, Math.PI * 2); ctx.stroke();
+        ctx.strokeStyle = '#0077B6'; ctx.beginPath(); ctx.moveTo(400, 90); ctx.lineTo(400, 390); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(250, 240); ctx.lineTo(550, 240); ctx.stroke();
+        ctx.strokeRect(250, 90, 300, 300);
+        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 22px Arial'; ctx.fillText('BRAND DESIGN SYSTEM MANUAL', 50, 460);
+        ctx.font = '14px Courier New'; ctx.fillStyle = '#00A859'; ctx.fillText('R100mm / CX: 400.00 / CY: 240.00', 50, 490);
+
+        // =====================================================================
+        // RENDER 5: SOCIAL MEDIA MARKETING (800x533)
+        // =====================================================================
+        ctx = canvasSocial;
+        ctx.fillStyle = '#0284c7'; ctx.fillRect(0, 0, 800, 533);
+        ctx.fillStyle = '#0f172a'; ctx.beginPath(); ctx.moveTo(450, 0); ctx.lineTo(800, 0); ctx.lineTo(800, 533); ctx.lineTo(300, 533); ctx.fill();
+        ctx.fillStyle = '#00A859'; ctx.beginPath(); ctx.arc(150, 150, 80, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 42px Arial'; ctx.fillText('DIGITAL CAMPAIGN', 350, 200);
+        ctx.fillStyle = '#00A859'; ctx.font = 'bold 24px Arial'; ctx.fillText('70% ENTERPRISE GROWTH', 350, 250);
+        ctx.fillStyle = '#94a3b8'; ctx.font = '16px Arial'; ctx.fillText('Optimized Layout Matrix Assets for Facebook & WhatsApp Distribution', 350, 300);
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(350, 350, 180, 45);
+        ctx.fillStyle = '#0f172a'; ctx.font = 'bold 16px Arial'; ctx.fillText('LAUNCH AUDIT', 380, 378);
+
+        // =====================================================================
+        // DOWNLOAD PIPELINES
+        // =====================================================================
+        function downloadSingle(canvasId, filename) {
+            const c = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = c.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+
+        document.getElementById('downloadAllBtn').addEventListener('click', function() {
+            const assets = [
+                { id: 'canvas-banner', name: 'banner.jpg' },
+                { id: 'canvas-calendar', name: 'calendar.jpg' },
+                { id: 'canvas-billboard', name: 'billboard.jpg' },
+                { id: 'canvas-logo', name: 'logo-project.jpg' },
+                { id: 'canvas-social', name: 'social-media.jpg' }
+            ];
+            
+            assets.forEach((asset, index) => {
+                setTimeout(() => {
+                    downloadSingle(asset.id, asset.name);
+                }, index * 400); // 400ms delay avoids browser blocking multiple downloads
+            });
+        });
+    </script>
+</body>
+</html>
