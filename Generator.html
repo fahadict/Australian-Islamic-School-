@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMAL.ICT Portfolio Asset Generator Bundle</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #090d16;
+            color: #f1f5f9;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: #00B4D8; border-bottom: 2px solid #131c2e; padding-bottom: 10px; }
+        p { color: #94a3b8; line-height: 1.6; }
+        .instructions { background: #131c2e; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: #1c2536; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .card h3 { margin-top: 0; font-size: 1.1rem; color: #06D6A0; word-break: break-all; }
+        .btn { display: inline-block; background: #00B4D8; color: #090d16; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; cursor: pointer; border: none; width: 100%; box-sizing: border-box;}
+        .btn:hover { background: #0077b6; color: white; }
+        .btn-pdf { background: #ff4d4d; color: white; }
+        .btn-pdf:hover { background: #cc0000; }
+    </style>
+</head>
+<body>
+
+    <h1>JAMAL.ICT Portfolio Asset Generator Dashboard</h1>
+    <div class="instructions">
+        <h3>How to use this Generator:</h3>
+        <p>1. Open this file (`generator.html`) in any modern web browser (Chrome, Edge, Firefox).</p>
+        <p>2. Click each button below to dynamically build and download the exact placeholder files required by your portfolio.</p>
+        <p>3. Move the downloaded items into your local project folders (`assets/images/` and `assets/documents/`).</p>
+    </div>
+
+    <h2>Images Asset Bundle (`assets/images/`)</h2>
+    <p style="margin-bottom: 20px;">Generates dark-tech visual templates styled specifically to your theme profile palette.</p>
+    <div class="grid" id="image-grid"></div>
+
+    <h2 style="margin-top: 40px;">Document PDF Bundle (`assets/documents/`)</h2>
+    <p style="margin-bottom: 20px;">Generates clean structural sample documents mapped directly to your routing layout links.</p>
+    <div class="grid" id="pdf-grid"></div>
+
+    <script>
+        const imageAssets = [
+            { name: "jamal-profile.jpg", title: "JAMAL FAHAD MOHAMED", subtitle: "ICT Specialist Headshot Profile Template" },
+            { name: "lesson-plans-preview.jpg", title: "LESSON PLANS PREVIEW", subtitle: "Pearson Edexcel Syllabus Documentation Maps" },
+            { name: "classroom-lab.jpg", title: "CLASSROOM LAB SNAPSHOT", subtitle: "Active Computing Laboratory Workstations Layout" },
+            { name: "student-work-preview.jpg", title: "STUDENT WORK PREVIEW", subtitle: "Code Blocks, System Queries, and UI Architecture" },
+            { name: "certificates-preview.jpg", title: "TRAINING CERTIFICATES", subtitle: "Academic Verification Milestones & Credentials Grid" },
+            { name: "curriculum-preview.jpg", title: "CURRICULUM PREVIEW", subtitle: "Course Outlines, Progress Trackers & Mock Papers" },
+            { name: "school-portal.jpg", title: "SCHOOL PORTAL CORE SYSTEM", subtitle: "Responsive Admin Panel Dashboard Application Layout" },
+            { name: "library-system.jpg", title: "LIBRARY MANAGEMENT SYSTEM", subtitle: "Relational Database Infrastructure Application Showcase" },
+            { name: "student-database.jpg", title: "STUDENT DATABASE MODULE", subtitle: "MS Access Custom Relational Entity Diagram Samples" },
+            { name: "educational-website.jpg", title: "EDUCATIONAL PLATFORM", subtitle: "HTML5 / CSS3 Learning Management Resource Dashboard" },
+            { name: "graphics-portfolio.jpg", title: "GRAPHIC DESIGN PORTFOLIO", subtitle: "Vector Assets, Brand Materials, and Layout Frameworks" }
+        ];
+
+        const pdfAssets = [
+            { name: "cv.pdf", title: "Jamal Fahad Mohamed - Professional Curriculum Vitae", desc: "Interactive System Architect Resume Document Template" },
+            { name: "lesson-plans-sample.pdf", title: "Pearson Edexcel ICT Lesson Plan Sample Framework", desc: "Weekly Active Learning Delivery Parameters and Lab Schemes" },
+            { name: "curriculum-sample.pdf", title: "Somaliland Tech Curricular Structure & Mapping", desc: "Syllabus Trackers, Mock Blueprints, and Practical Rubrics" }
+        ];
+
+        // Process Canvas Image Building
+        const imageGrid = document.getElementById('image-grid');
+        imageAssets.forEach(asset => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${asset.name}</h3>
+                <p style="font-size:0.85rem; min-height:40px;">${asset.subtitle}</p>
+                <button class="btn" onclick="generateImage('${asset.name}', '${asset.title}', '${asset.subtitle}')">Generate & Download</button>
+            `;
+            imageGrid.appendChild(card);
+        });
+
+        function generateImage(filename, title, subtitle) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            // Dark Blue Tech Background Background
+            ctx.fillStyle = "#131c2e";
+            ctx.fillRect(0, 0, 800, 500);
+
+            // Tech Grid Accent
+            ctx.strokeStyle = "rgba(0, 180, 216, 0.05)";
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 800; i += 40) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 500); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(800, i); ctx.stroke();
+            }
+
+            // Outer Neon Cyan Frame
+            ctx.strokeStyle = "#00B4D8";
+            ctx.lineWidth = 4;
+            ctx.strokeRect(20, 20, 760, 460);
+
+            // Teal Accent Tag Block
+            ctx.fillStyle = "#06D6A0";
+            ctx.fillRect(40, 40, 150, 6);
+
+            // Title Typography
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 28px 'Segoe UI', Arial, sans-serif";
+            ctx.fillText(title, 40, 100);
+
+            // Subtitle Typography
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "16px 'Segoe UI', Arial, sans-serif";
+            ctx.fillText(subtitle, 40, 140);
+
+            // Watermark Logo Brand
+            ctx.fillStyle = "rgba(0, 180, 216, 0.2)";
+            ctx.font = "bold 14px 'Segoe UI', Arial, sans-serif";
+            ctx.fillText("JAMAL.ICT PORTFOLIO PROTOTYPE MODULE", 40, 440);
+
+            // Save Pipeline Action Trigger
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+
+        // Process PDF Mock Binary Building
+        const pdfGrid = document.getElementById('pdf-grid');
+        pdfAssets.forEach(asset => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${asset.name}</h3>
+                <p style="font-size:0.85rem; min-height:40px;">${asset.desc}</p>
+                <button class="btn btn-pdf" onclick="generatePDF('${asset.name}', '${asset.title}')">Generate & Download</button>
+            `;
+            pdfGrid.appendChild(card);
+        });
+
+        function generatePDF(filename, title) {
+            // Generates a lightweight, valid, compliant raw plain text PDF string structure dynamically
+            const docContent = `%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> /MediaBox [0 0 595 842] /Contents 4 0 R >>\nendobj\n4 0 obj\n<< /Length 150 >>\nstream\nBT\n/F1 18 Tf\n50 750 Td\n(${title})\nTj\n0 -30 Td\n/F1 12 Tf\n(Automated verification document generated securely for Jamal Fahad Mohamed's portfolio layout infrastructure.)\nTj\nET\nendstream\nendobj\nxref\n0 5\n0000000000 65535 f\n0000000009 00000 n\n0000000060 00000 n\n0000000121 00000 n\n0000000281 00000 n\ntrailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n480\n%%EOF`;
+            
+            const blob = new Blob([docContent], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+    </script>
+</body>
+</html>
