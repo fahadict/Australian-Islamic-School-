@@ -2,253 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio Asset Production Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMAL.ICT Portfolio Asset Generator Bundle</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 40px 20px;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #090d16;
+            color: #f1f5f9;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .header-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .header-title h1 { margin: 0; color: #00A859; font-size: 2.5rem; }
-        .header-title p { color: #94a3b8; margin-top: 10px; }
-        .studio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            width: 100%;
-        }
-        .asset-card {
-            background: #1e293b;
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid #334155;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        .asset-card h3 { margin-top: 0; margin-bottom: 5px; color: #f1f5f9; width: 100%; text-align: left; }
-        .asset-card p { color: #94a3b8; font-size: 0.9rem; margin-top: 0; margin-bottom: 15px; width: 100%; text-align: left; }
-        canvas {
-            background: #000;
-            border-radius: 6px;
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #475569;
-            margin-bottom: 20px;
-        }
-        .btn-download {
-            background: #0077B6;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.2s;
-        }
-        .btn-download:hover { background: #0096c7; }
-        .btn-all {
-            background: #00A859;
-            color: white;
-            border: none;
-            padding: 16px 36px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 14px rgba(0, 168, 89, 0.4);
-            transition: transform 0.2s;
-        }
-        .btn-all:hover { background: #00944e; transform: translateY(-2px); }
+        h1 { color: #00B4D8; border-bottom: 2px solid #131c2e; padding-bottom: 10px; }
+        p { color: #94a3b8; line-height: 1.6; }
+        .instructions { background: #131c2e; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: #1c2536; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .card h3 { margin-top: 0; font-size: 1.1rem; color: #06D6A0; word-break: break-all; }
+        .btn { display: inline-block; background: #00B4D8; color: #090d16; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; cursor: pointer; border: none; width: 100%; box-sizing: border-box;}
+        .btn:hover { background: #0077b6; color: white; }
+        .btn-pdf { background: #ff4d4d; color: white; }
+        .btn-pdf:hover { background: #cc0000; }
     </style>
 </head>
 <body>
 
-    <div class="header-title">
-        <h1>Portfolio Image Asset Studio</h1>
-        <p>Generate, render, and download pixel-perfect graphics for your portfolio directories.</p>
+    <h1>JAMAL.ICT Portfolio Asset Generator Dashboard</h1>
+    <div class="instructions">
+        <h3>How to use this Generator:</h3>
+        <p>1. Open this file (`generator.html`) in any modern web browser (Chrome, Edge, Firefox).</p>
+        <p>2. Click each button below to dynamically build and download the exact placeholder files required by your portfolio.</p>
+        <p>3. Move the downloaded items into your local project folders (`assets/images/` and `assets/documents/`).</p>
     </div>
 
-    <button class="btn-all" id="downloadAllBtn">Download All 5 Assets Automatically</button>
+    <h2>Images Asset Bundle (`assets/images/`)</h2>
+    <p style="margin-bottom: 20px;">Generates dark-tech visual templates styled specifically to your theme profile palette.</p>
+    <div class="grid" id="image-grid"></div>
 
-    <div class="studio-grid">
-        <!-- BANNER -->
-        <div class="asset-card">
-            <div>
-                <h3>1. banner.jpg</h3>
-                <p>1920x1080 | Technical Blueprint Background</p>
-            </div>
-            <canvas id="canvas-banner" width="1920" height="1080" style="aspect-ratio: 16/9;"></canvas>
-            <button class="btn-download" onclick="downloadSingle('canvas-banner', 'banner.jpg')">Download banner.jpg</button>
-        </div>
-
-        <!-- CALENDAR -->
-        <div class="asset-card">
-            <div>
-                <h3>2. calendar.jpg</h3>
-                <p>800x533 | Publication & Grid Design Layout</p>
-            </div>
-            <canvas id="canvas-calendar" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
-            <button class="btn-download" onclick="downloadSingle('canvas-calendar', 'calendar.jpg')">Download calendar.jpg</button>
-        </div>
-
-        <!-- BILLBOARD -->
-        <div class="asset-card">
-            <div>
-                <h3>3. billboard.jpg</h3>
-                <p>800x533 | Large-Format Scale Exhibition Graphic</p>
-            </div>
-            <canvas id="canvas-billboard" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
-            <button class="btn-download" onclick="downloadSingle('canvas-billboard', 'billboard.jpg')">Download billboard.jpg</button>
-        </div>
-
-        <!-- LOGO PROJECT -->
-        <div class="asset-card">
-            <div>
-                <h3>4. logo-project.jpg</h3>
-                <p>800x533 | Scalable Brand Geometry Manual</p>
-            </div>
-            <canvas id="canvas-logo" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
-            <button class="btn-download" onclick="downloadSingle('canvas-logo', 'logo-project.jpg')">Download logo-project.jpg</button>
-        </div>
-
-        <!-- SOCIAL MEDIA -->
-        <div class="asset-card">
-            <div>
-                <h3>5. social-media.jpg</h3>
-                <p>800x533 | High-Contrast Digital Ad Vector Layout</p>
-            </div>
-            <canvas id="canvas-social" width="800" height="533" style="aspect-ratio: 800/533;"></canvas>
-            <button class="btn-download" onclick="downloadSingle('canvas-social', 'social-media.jpg')">Download social-media.jpg</button>
-        </div>
-    </div>
+    <h2 style="margin-top: 40px;">Document PDF Bundle (`assets/documents/`)</h2>
+    <p style="margin-bottom: 20px;">Generates clean structural sample documents mapped directly to your routing layout links.</p>
+    <div class="grid" id="pdf-grid"></div>
 
     <script>
-        // Setup all canvases
-        const canvasBanner = document.getElementById('canvas-banner').getContext('2d');
-        const canvasCalendar = document.getElementById('canvas-calendar').getContext('2d');
-        const canvasBillboard = document.getElementById('canvas-billboard').getContext('2d');
-        const canvasLogo = document.getElementById('canvas-logo').getContext('2d');
-        const canvasSocial = document.getElementById('canvas-social').getContext('2d');
+        const imageAssets = [
+            { name: "jamal-profile.jpg", title: "JAMAL FAHAD MOHAMED", subtitle: "ICT Specialist Headshot Profile Template" },
+            { name: "lesson-plans-preview.jpg", title: "LESSON PLANS PREVIEW", subtitle: "Pearson Edexcel Syllabus Documentation Maps" },
+            { name: "classroom-lab.jpg", title: "CLASSROOM LAB SNAPSHOT", subtitle: "Active Computing Laboratory Workstations Layout" },
+            { name: "student-work-preview.jpg", title: "STUDENT WORK PREVIEW", subtitle: "Code Blocks, System Queries, and UI Architecture" },
+            { name: "certificates-preview.jpg", title: "TRAINING CERTIFICATES", subtitle: "Academic Verification Milestones & Credentials Grid" },
+            { name: "curriculum-preview.jpg", title: "CURRICULUM PREVIEW", subtitle: "Course Outlines, Progress Trackers & Mock Papers" },
+            { name: "school-portal.jpg", title: "SCHOOL PORTAL CORE SYSTEM", subtitle: "Responsive Admin Panel Dashboard Application Layout" },
+            { name: "library-system.jpg", title: "LIBRARY MANAGEMENT SYSTEM", subtitle: "Relational Database Infrastructure Application Showcase" },
+            { name: "student-database.jpg", title: "STUDENT DATABASE MODULE", subtitle: "MS Access Custom Relational Entity Diagram Samples" },
+            { name: "educational-website.jpg", title: "EDUCATIONAL PLATFORM", subtitle: "HTML5 / CSS3 Learning Management Resource Dashboard" },
+            { name: "graphics-portfolio.jpg", title: "GRAPHIC DESIGN PORTFOLIO", subtitle: "Vector Assets, Brand Materials, and Layout Frameworks" }
+        ];
 
-        // =====================================================================
-        // RENDER 1: BANNER BACKGROUND (1920x1080)
-        // =====================================================================
-        let ctx = canvasBanner;
-        ctx.fillStyle = '#0f172a';
-        ctx.fillRect(0, 0, 1920, 1080);
-        ctx.strokeStyle = 'rgba(0, 119, 182, 0.08)';
-        ctx.lineWidth = 1;
-        for (let x = 0; x < 1920; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1080); ctx.stroke(); }
-        for (let y = 0; y < 1080; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1920, y); ctx.stroke(); }
-        ctx.strokeStyle = 'rgba(0, 168, 89, 0.15)';
-        ctx.strokeRect(60, 60, 200, 200);
-        ctx.strokeRect(1920 - 260, 1080 - 260, 200, 200);
-        function cross(x,y) {
-            ctx.strokeStyle = 'rgba(0, 168, 89, 0.3)';
-            ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(x-20, y); ctx.lineTo(x+20, y); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(x, y-20); ctx.lineTo(x, y+20); ctx.stroke();
-        }
-        cross(300, 250); cross(1600, 800); cross(200, 850); cross(1700, 200);
+        const pdfAssets = [
+            { name: "cv.pdf", title: "Jamal Fahad Mohamed - Professional Curriculum Vitae", desc: "Interactive System Architect Resume Document Template" },
+            { name: "lesson-plans-sample.pdf", title: "Pearson Edexcel ICT Lesson Plan Sample Framework", desc: "Weekly Active Learning Delivery Parameters and Lab Schemes" },
+            { name: "curriculum-sample.pdf", title: "Somaliland Tech Curricular Structure & Mapping", desc: "Syllabus Trackers, Mock Blueprints, and Practical Rubrics" }
+        ];
 
-        // =====================================================================
-        // RENDER 2: CALENDAR DESIGN (800x533)
-        // =====================================================================
-        ctx = canvasCalendar;
-        ctx.fillStyle = '#1e293b'; ctx.fillRect(0, 0, 800, 533);
-        ctx.fillStyle = '#0f172a'; ctx.fillRect(40, 40, 720, 453);
-        ctx.fillStyle = '#00A859'; ctx.fillRect(40, 40, 720, 80);
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 24px Arial'; ctx.fillText('ACADEMIC CALENDAR & LAYOUT SCHEDULE', 70, 90);
-        ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
-        for(let i=0; i<6; i++) {
-            for(let j=0; j<4; j++) {
-                ctx.fillStyle = '#1e293b'; ctx.fillRect(70 + (i*110), 150 + (j*75), 95, 60);
-                ctx.fillStyle = 'rgba(148, 163, 184, 0.2)'; ctx.fillRect(75 + (i*110), 155 + (j*75), 40, 12);
+        // Process Canvas Image Building
+        const imageGrid = document.getElementById('image-grid');
+        imageAssets.forEach(asset => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${asset.name}</h3>
+                <p style="font-size:0.85rem; min-height:40px;">${asset.subtitle}</p>
+                <button class="btn" onclick="generateImage('${asset.name}', '${asset.title}', '${asset.subtitle}')">Generate & Download</button>
+            `;
+            imageGrid.appendChild(card);
+        });
+
+        function generateImage(filename, title, subtitle) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            // Dark Blue Tech Background Background
+            ctx.fillStyle = "#131c2e";
+            ctx.fillRect(0, 0, 800, 500);
+
+            // Tech Grid Accent
+            ctx.strokeStyle = "rgba(0, 180, 216, 0.05)";
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 800; i += 40) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 500); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(800, i); ctx.stroke();
             }
-        }
-        ctx.fillStyle = 'rgba(0, 119, 182, 0.4)'; ctx.fillRect(70, 400, 660, 40);
 
-        // =====================================================================
-        // RENDER 3: BILLBOARD EXHIBITION (800x533)
-        // =====================================================================
-        ctx = canvasBillboard;
-        ctx.fillStyle = '#0f172a'; ctx.fillRect(0, 0, 800, 533);
-        let grad = ctx.createLinearGradient(0, 0, 800, 0); grad.addColorStop(0, '#0077B6'); grad.addColorStop(1, '#00A859');
-        ctx.fillStyle = grad; ctx.fillRect(100, 100, 600, 300);
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.6)'; ctx.fillRect(100, 100, 600, 300);
-        ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 3; ctx.strokeRect(130, 130, 540, 240);
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 36px Arial'; ctx.fillText('LARGE-FORMAT EXHIBITION', 160, 220);
-        ctx.font = '20px Arial'; ctx.fillStyle = '#cbd5e1'; ctx.fillText('Error-Free Printing • High-Resolution Geometry Vector Scaling', 160, 270);
-        ctx.fillStyle = '#334155'; ctx.fillRect(80, 400, 640, 20); ctx.fillRect(200, 420, 40, 80); ctx.fillRect(560, 420, 40, 80);
+            // Outer Neon Cyan Frame
+            ctx.strokeStyle = "#00B4D8";
+            ctx.lineWidth = 4;
+            ctx.strokeRect(20, 20, 760, 460);
 
-        // =====================================================================
-        // RENDER 4: LOGO PRODUCTION HANDBOOK (800x533)
-        // =====================================================================
-        ctx = canvasLogo;
-        ctx.fillStyle = '#111827'; ctx.fillRect(0, 0, 800, 533);
-        ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-        for (let i = 0; i < 800; i += 20) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 533); ctx.stroke(); }
-        ctx.strokeStyle = '#00A859'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(400, 240, 100, 0, Math.PI * 2); ctx.stroke();
-        ctx.strokeStyle = '#0077B6'; ctx.beginPath(); ctx.moveTo(400, 90); ctx.lineTo(400, 390); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(250, 240); ctx.lineTo(550, 240); ctx.stroke();
-        ctx.strokeRect(250, 90, 300, 300);
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 22px Arial'; ctx.fillText('BRAND DESIGN SYSTEM MANUAL', 50, 460);
-        ctx.font = '14px Courier New'; ctx.fillStyle = '#00A859'; ctx.fillText('R100mm / CX: 400.00 / CY: 240.00', 50, 490);
+            // Teal Accent Tag Block
+            ctx.fillStyle = "#06D6A0";
+            ctx.fillRect(40, 40, 150, 6);
 
-        // =====================================================================
-        // RENDER 5: SOCIAL MEDIA MARKETING (800x533)
-        // =====================================================================
-        ctx = canvasSocial;
-        ctx.fillStyle = '#0284c7'; ctx.fillRect(0, 0, 800, 533);
-        ctx.fillStyle = '#0f172a'; ctx.beginPath(); ctx.moveTo(450, 0); ctx.lineTo(800, 0); ctx.lineTo(800, 533); ctx.lineTo(300, 533); ctx.fill();
-        ctx.fillStyle = '#00A859'; ctx.beginPath(); ctx.arc(150, 150, 80, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 42px Arial'; ctx.fillText('DIGITAL CAMPAIGN', 350, 200);
-        ctx.fillStyle = '#00A859'; ctx.font = 'bold 24px Arial'; ctx.fillText('70% ENTERPRISE GROWTH', 350, 250);
-        ctx.fillStyle = '#94a3b8'; ctx.font = '16px Arial'; ctx.fillText('Optimized Layout Matrix Assets for Facebook & WhatsApp Distribution', 350, 300);
-        ctx.fillStyle = '#ffffff'; ctx.fillRect(350, 350, 180, 45);
-        ctx.fillStyle = '#0f172a'; ctx.font = 'bold 16px Arial'; ctx.fillText('LAUNCH AUDIT', 380, 378);
+            // Title Typography
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 28px 'Segoe UI', Arial, sans-serif";
+            ctx.fillText(title, 40, 100);
 
-        // =====================================================================
-        // DOWNLOAD PIPELINES
-        // =====================================================================
-        function downloadSingle(canvasId, filename) {
-            const c = document.getElementById(canvasId);
+            // Subtitle Typography
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "16px 'Segoe UI', Arial, sans-serif";
+            ctx.fillText(subtitle, 40, 140);
+
+            // Watermark Logo Brand
+            ctx.fillStyle = "rgba(0, 180, 216, 0.2)";
+            ctx.font = "bold 14px 'Segoe UI', Arial, sans-serif";
+            ctx.fillText("JAMAL.ICT PORTFOLIO PROTOTYPE MODULE", 40, 440);
+
+            // Save Pipeline Action Trigger
             const link = document.createElement('a');
             link.download = filename;
-            link.href = c.toDataURL('image/jpeg', 0.9);
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
             link.click();
         }
 
-        document.getElementById('downloadAllBtn').addEventListener('click', function() {
-            const assets = [
-                { id: 'canvas-banner', name: 'banner.jpg' },
-                { id: 'canvas-calendar', name: 'calendar.jpg' },
-                { id: 'canvas-billboard', name: 'billboard.jpg' },
-                { id: 'canvas-logo', name: 'logo-project.jpg' },
-                { id: 'canvas-social', name: 'social-media.jpg' }
-            ];
-            
-            assets.forEach((asset, index) => {
-                setTimeout(() => {
-                    downloadSingle(asset.id, asset.name);
-                }, index * 400); // 400ms delay avoids browser blocking multiple downloads
-            });
+        // Process PDF Mock Binary Building
+        const pdfGrid = document.getElementById('pdf-grid');
+        pdfAssets.forEach(asset => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${asset.name}</h3>
+                <p style="font-size:0.85rem; min-height:40px;">${asset.desc}</p>
+                <button class="btn btn-pdf" onclick="generatePDF('${asset.name}', '${asset.title}')">Generate & Download</button>
+            `;
+            pdfGrid.appendChild(card);
         });
+
+        function generatePDF(filename, title) {
+            // Generates a lightweight, valid, compliant raw plain text PDF string structure dynamically
+            const docContent = `%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> /MediaBox [0 0 595 842] /Contents 4 0 R >>\nendobj\n4 0 obj\n<< /Length 150 >>\nstream\nBT\n/F1 18 Tf\n50 750 Td\n(${title})\nTj\n0 -30 Td\n/F1 12 Tf\n(Automated verification document generated securely for Jamal Fahad Mohamed's portfolio layout infrastructure.)\nTj\nET\nendstream\nendobj\nxref\n0 5\n0000000000 65535 f\n0000000009 00000 n\n0000000060 00000 n\n0000000121 00000 n\n0000000281 00000 n\ntrailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n480\n%%EOF`;
+            
+            const blob = new Blob([docContent], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
     </script>
 </body>
 </html>
