@@ -2,165 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Preview & Downloader</title>
+    <title>High-Visibility Asset Generator</title>
     <style>
-        :root {
-            --primary: #00B4D8;
-            --dark-bg: #090d16;
-            --card-bg: #131c2e;
-            --text: #f1f5f9;
-        }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text); padding: 40px; }
-        h1, h2 { color: var(--primary); border-bottom: 1px solid #2d3748; padding-bottom: 10px; }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-        
-        .asset-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.2s;
-        }
-        .asset-card:hover { transform: translateY(-5px); }
-
-        .preview-container {
-            width: 100%;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid #2d3748;
-        }
-
-        /* Responsive aspect ratio forcing */
-        .preview-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .details { padding: 15px; text-align: center; }
-        .details h3 { margin: 0 0 5px 0; font-size: 1rem; color: #fff; }
-        .details p { margin: 0 0 15px 0; font-size: 0.8rem; color: #94a3b8; }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background: var(--primary);
-            color: var(--dark-bg);
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-        }
-        .btn:hover { background: #0096b6; }
-        .pdf-card { border-top: 4px solid #ef4444; }
-        .btn-pdf { background: #ef4444; color: white; }
+        body { font-family: 'Segoe UI', sans-serif; background: #090d16; color: #f1f5f9; padding: 40px; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
+        .card { background: #131c2e; border: 2px solid #1e293b; border-radius: 15px; padding: 15px; }
+        .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border-radius: 8px; overflow: hidden; }
+        canvas { max-width: 100%; height: auto; border: 1px solid #334155; }
+        .btn { background: #00B4D8; color: #090d16; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; display: block; }
+        .btn:hover { background: #06D6A0; }
+        h3 { margin: 10px 0; font-size: 0.9rem; letter-spacing: 1px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
-    <h1>Jamal.ICT Asset Preview Dashboard</h1>
-    <p>View the generated placeholder images below. Click download to save them with the exact required filenames.</p>
+    <h1>Portfolio Image Asset Preview</h1>
+    <p>If the boxes below are not blank, click "Download" to save the file.</p>
 
-    <h2>1. Profile Image (1:1 Ratio)</h2>
-    <div class="gallery" id="profile-gallery"></div>
-
-    <h2>2. Project & Evidence Images (16:10 Ratio)</h2>
-    <div class="gallery" id="project-gallery"></div>
-
-    <h2>3. PDF Documents</h2>
-    <div class="gallery" id="pdf-gallery"></div>
+    <div class="grid" id="main-grid"></div>
 
     <script>
-        const projectImages = [
-            "lesson-plans-preview.jpg", "classroom-lab.jpg", "student-work-preview.jpg",
-            "certificates-preview.jpg", "curriculum-preview.jpg", "school-portal.jpg",
-            "library-system.jpg", "student-database.jpg", "educational-website.jpg", "graphics-portfolio.jpg"
+        const assets = [
+            { name: "jamal-profile.jpg", w: 500, h: 500, color: "#00B4D8", txtColor: "#090d16" },
+            { name: "classroom-lab.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "school-portal.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "library-system.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "lesson-plans-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "student-work-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "certificates-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "curriculum-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "student-database.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "educational-website.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
+            { name: "graphics-portfolio.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" }
         ];
 
-        const pdfDocs = ["cv.pdf", "lesson-plans-sample.pdf", "curriculum-sample.pdf"];
+        const grid = document.getElementById('main-grid');
 
-        // Helper to draw and get DataURL
-        function generateCanvasURL(w, h, label, isProfile = false) {
+        assets.forEach(asset => {
+            // Create Canvas
             const canvas = document.createElement('canvas');
-            canvas.width = w; canvas.height = h;
+            canvas.width = asset.w;
+            canvas.height = asset.h;
             const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = isProfile ? "#00B4D8" : "#131c2e";
-            ctx.fillRect(0, 0, w, h);
-            
-            // Frame
-            ctx.strokeStyle = "rgba(255,255,255,0.2)";
-            ctx.lineWidth = 10;
-            ctx.strokeRect(0, 0, w, h);
 
-            // Label text
-            ctx.fillStyle = isProfile ? "#090d16" : "#ffffff";
-            ctx.font = `bold ${w/12}px Segoe UI, sans-serif`;
+            // Draw Background
+            ctx.fillStyle = asset.color;
+            ctx.fillRect(0, 0, asset.w, asset.h);
+
+            // Draw Pattern/Border so it's not "Blank"
+            ctx.strokeStyle = asset.txtColor;
+            ctx.lineWidth = 20;
+            ctx.strokeRect(0, 0, asset.w, asset.h);
+            
+            // Draw Large Label
+            ctx.fillStyle = asset.txtColor;
+            ctx.font = `bold ${asset.w / 10}px Arial`;
             ctx.textAlign = "center";
-            ctx.fillText(label.toUpperCase(), w/2, h/2);
+            ctx.textBaseline = "middle";
+            ctx.fillText(asset.name.split('.')[0].toUpperCase(), asset.w / 2, asset.h / 2);
 
-            return canvas.toDataURL('image/jpeg', 0.9);
-        }
-
-        // Render Profile
-        const profGallery = document.getElementById('profile-gallery');
-        const profUrl = generateCanvasURL(500, 500, "Profile Image", true);
-        profGallery.innerHTML = createCard("jamal-profile.jpg", "500 x 500 px", profUrl);
-
-        // Render Projects
-        const projGallery = document.getElementById('project-gallery');
-        projectImages.forEach(name => {
-            const url = generateCanvasURL(800, 500, name.split('.')[0].replace(/-/g, ' '));
-            projGallery.innerHTML += createCard(name, "800 x 500 px", url);
+            // Create Card
+            const dataUrl = canvas.toDataURL('image/jpeg');
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="preview-box">
+                    <img src="${dataUrl}" style="width:100%">
+                </div>
+                <h3>${asset.name}</h3>
+                <a href="${dataUrl}" download="${asset.name}" class="btn">DOWNLOAD FILE</a>
+            `;
+            grid.appendChild(card);
         });
-
-        // Render PDFs
-        const pdfGallery = document.getElementById('pdf-gallery');
-        pdfDocs.forEach(name => {
-            pdfGallery.innerHTML += `
-                <div class="asset-card pdf-card">
-                    <div class="details">
-                        <h3>${name}</h3>
-                        <p>Standard PDF Document</p>
-                        <button class="btn btn-pdf" onclick="downloadPDF('${name}')">Download PDF</button>
-                    </div>
-                </div>`;
-        });
-
-        function createCard(filename, size, dataUrl) {
-            return `
-                <div class="asset-card">
-                    <div class="preview-container">
-                        <img src="${dataUrl}" class="preview-img" alt="Preview">
-                    </div>
-                    <div class="details">
-                        <h3>${filename}</h3>
-                        <p>${size}</p>
-                        <a href="${dataUrl}" download="${filename}" class="btn">Download Image</a>
-                    </div>
-                </div>`;
-        }
-
-        function downloadPDF(name) {
-            const pdfData = `%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> /MediaBox [0 0 595 842] /Contents 4 0 R >>\nendobj\n4 0 obj\n<< /Length 50 >>\nstream\nBT /F1 12 Tf 50 780 Td (${name} Placeholder) Tj ET\nendstream\nendobj\nxref\n0 5\n0000000000 65535 f\ntrailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n350\n%%EOF`;
-            const blob = new Blob([pdfData], { type: 'application/pdf' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = name;
-            link.click();
-        }
     </script>
 </body>
 </html>
