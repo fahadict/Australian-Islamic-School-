@@ -2,49 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio Preview</title>
+    <title>Instant Portfolio Asset Downloader</title>
     <style>
-        body { background: #090d16; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #131c2e; padding: 15px; border-radius: 10px; border: 1px solid #1e293b; }
-        img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; background: #020617; }
-        .error-msg { color: #ff4d4d; font-size: 0.8rem; margin-top: 10px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #090d16; color: #f1f5f9; padding: 40px; text-align: center; }
+        h1 { color: #00B4D8; }
+        p { color: #94a3b8; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 10px; padding: 20px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
+        .filename { font-family: monospace; font-weight: bold; color: #06D6A0; font-size: 1rem; margin: 5px 0; }
+        .source { font-size: 0.8rem; color: #64748b; margin-bottom: 15px; }
+        .btn { background: #00B4D8; color: #090d16; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
+        .btn:hover { background: #06D6A0; }
+        .download-all { background: #06D6A0; color: #090d16; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 40px; }
+        .download-all:hover { background: #00B4D8; }
     </style>
 </head>
 <body>
-    <h1>Asset Verification</h1>
-    <p>If an image is missing, ensure it is named correctly in <b>assets/images/</b></p>
-    
-    <div class="grid">
-        <div class="card">
-            <img src="assets/images/jamal-profile.jpg" alt="Profile">
-            <p>jamal-profile.jpg</p>
-        </div>
-        <div class="card">
-            <img src="assets/images/classroom-lab.jpg" alt="Lab">
-            <p>classroom-lab.jpg</p>
-        </div>
-        <div class="card">
-            <img src="assets/images/student-database.jpg" alt="Database">
-            <p>student-database.jpg</p>
-        </div>
-        <div class="card">
-            <img src="assets/images/school-portal.jpg" alt="Portal">
-            <p>school-portal.jpg</p>
-        </div>
-    </div>
+
+    <h1>Somaliland Portfolio Asset Downloader</h1>
+    <p>Place this HTML file in the same folder as your downloaded raw images to convert and rename them instantly.</p>
+
+    <button class="download-all" onclick="downloadAll()">Download All 10 Renamed Portfolio Images</button>
+
+    <div class="grid" id="downloader-grid"></div>
 
     <script>
-        // Simple script to alert if images are still missing
-        document.querySelectorAll('img').forEach(img => {
-            img.onerror = function() {
-                this.style.border = "2px solid red";
-                let p = document.createElement('p');
-                p.className = "error-msg";
-                p.innerText = "File Not Found in assets/images/";
-                this.parentNode.appendChild(p);
-            };
+        const filesMap = [
+            { source: "10171.jpg", target: "jamal-profile.jpg" },
+            { source: "10468.jpg", target: "classroom-lab.jpg" },
+            { source: "10462.jpg", target: "student-database.jpg" },
+            { source: "10466.jpg", target: "library-system.jpg" },
+            { source: "10467.png", target: "school-portal.jpg" },
+            { source: "10459.jpg", target: "educational-website.jpg" },
+            { source: "10469.webp", target: "student-work-preview.jpg" },
+            { source: "10465.png", target: "lesson-plans-preview.jpg" },
+            { source: "10463.png", target: "curriculum-preview.jpg" },
+            { source: "10458.jpg", target: "graphics-portfolio.jpg" },
+            { source: "10464.jpg", target: "certificates-preview.jpg" }
+        ];
+
+        const grid = document.getElementById('downloader-grid');
+
+        filesMap.forEach(file => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div>
+                    <div class="source">Source: Original ${file.source}</div>
+                    <div class="filename">→ ${file.target}</div>
+                </div>
+                <button class="btn" onclick="triggerDownload('${file.source}', '${file.target}')">Convert & Save</button>
+            `;
+            grid.appendChild(card);
         });
+
+        function triggerDownload(source, target) {
+            const link = document.createElement('a');
+            link.href = source;
+            link.download = target;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function downloadAll() {
+            filesMap.forEach((file, index) => {
+                setTimeout(() => {
+                    triggerDownload(file.source, file.target);
+                }, index * 400); // Small delay to prevent browser blockages
+            });
+        }
     </script>
 </body>
 </html>
