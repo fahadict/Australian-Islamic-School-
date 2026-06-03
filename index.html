@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realistic Portfolio Asset Downloader</title>
+    <title>East Africa & Somaliland Asset Downloader</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #090d16; color: #f1f5f9; padding: 20px; text-align: center; }
         h1 { color: #00B4D8; margin-bottom: 5px; font-size: 1.8rem; }
         p { color: #94a3b8; margin-top: 0; margin-bottom: 30px; font-size: 0.9rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
         .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; }
-        .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 12px; border-radius: 6px; overflow: hidden; }
+        .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 12px; border-radius: 6px; overflow: hidden; position: relative; }
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .tag { position: absolute; top: 8px; left: 8px; background: rgba(0, 180, 216, 0.85); color: #090d16; padding: 3px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; }
         .filename { margin: 8px 0; font-size: 0.85rem; color: #94a3b8; font-family: monospace; word-break: break-all; }
         .btn { background: #00B4D8; color: #090d16; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; box-sizing: border-box; margin-top: auto; font-size: 0.9rem; display: block; }
         .btn:hover { background: #06D6A0; }
@@ -19,24 +20,64 @@
 </head>
 <body>
 
-    <h1>Realistic Portfolio Image Downloader</h1>
-    <p>Real stock photos matched to your ICT curriculum. Click "DOWNLOAD" to save them directly to your device.</p>
+    <h1>Somaliland & Kenya Regional Portfolio Image Downloader</h1>
+    <p>Realistic photography curated to reflect East African education, local environments, and specialized ICT coursework.</p>
 
     <div class="grid" id="main-grid"></div>
 
     <script>
-        // High-quality uncopyrighted tech photos mapped to your exact website filenames
+        // High-quality imagery tailored specifically for your geographical and professional profile
         const assets = [
-            { name: "classroom-lab.jpg", url: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80" },
-            { name: "school-portal.jpg", url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80" },
-            { name: "library-system.jpg", url: "https://images.unsplash.com/photo-1468254095679-bbcba94a7086?w=800&auto=format&fit=crop&q=80" },
-            { name: "lesson-plans-preview.jpg", url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" },
-            { name: "student-work-preview.jpg", url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80" },
-            { name: "certificates-preview.jpg", url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80" },
-            { name: "curriculum-preview.jpg", url: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&auto=format&fit=crop&q=80" },
-            { name: "student-database.jpg", url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80" },
-            { name: "educational-website.jpg", url: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=80" },
-            { name: "graphics-portfolio.jpg", url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80" }
+            { 
+                name: "classroom-lab.jpg", 
+                context: "East African Tech Lab",
+                url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "school-portal.jpg", 
+                context: "Modern Institutional Systems",
+                url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "library-system.jpg", 
+                context: "Database UI Architecture",
+                url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "lesson-plans-preview.jpg", 
+                context: "Teacher Workspace",
+                url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "student-work-preview.jpg", 
+                context: "Active Coding Assignments",
+                url: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "certificates-preview.jpg", 
+                context: "Graduation & Credentials",
+                url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "curriculum-preview.jpg", 
+                context: "Academic Material Setup",
+                url: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "student-database.jpg", 
+                context: "Relational Data Models",
+                url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "educational-website.jpg", 
+                context: "E-Learning Resources",
+                url: "https://images.unsplash.com/photo-1610484826967-09c5720778c7?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "graphics-portfolio.jpg", 
+                context: "Digital Layout Design",
+                url: "https://images.unsplash.com/photo-1541462608141-ad4979e408c9?w=800&auto=format&fit=crop&q=80" 
+            }
         ];
 
         const grid = document.getElementById('main-grid');
@@ -46,6 +87,7 @@
             card.className = 'card';
             card.innerHTML = `
                 <div class="preview-box">
+                    <span class="tag">${asset.context}</span>
                     <img src="${asset.url}" crossorigin="anonymous" id="img-${asset.name.split('.')[0]}">
                 </div>
                 <div class="filename">${asset.name}</div>
@@ -54,7 +96,6 @@
             grid.appendChild(card);
         });
 
-        // Function to download the actual image stream securely
         function downloadRealImage(url, filename) {
             fetch(url)
                 .then(response => response.blob())
