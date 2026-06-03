@@ -1,91 +1,106 @@
 <!DOCTYPE html>
-<html lang="so">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaydka Agabka Pearson Edexcel ICT - Somaliland</title>
+    <title>Pearson Edexcel ICT Portfolio Asset Hub</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #090d16; color: #f1f5f9; padding: 20px; text-align: center; direction: ltr; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #090d16; color: #f1f5f9; padding: 20px; text-align: center; }
         h1 { color: #00B4D8; margin-bottom: 5px; font-size: 1.8rem; }
         .subtitle { color: #94a3b8; margin-top: 0; margin-bottom: 30px; font-size: 0.9rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; text-align: right; }
+        .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; text-align: left; }
         .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 12px; border-radius: 6px; overflow: hidden; position: relative; }
+        .preview-box.profile-box { height: 320px; } 
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .tag { position: absolute; top: 8px; right: 8px; background: #06D6A0; color: #090d16; padding: 3px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; }
-        .filename { margin: 4px 0; font-size: 0.85rem; color: #00B4D8; font-family: monospace; word-break: break-all; font-weight: bold; text-align: left; direction: ltr; }
-        .desc { margin: 0 0 15px 0; font-size: 0.8rem; color: #94a3b8; line-height: 1.5; min-height: 45px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .tag { position: absolute; top: 8px; left: 8px; background: #06D6A0; color: #090d16; padding: 3px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; }
+        .filename { margin: 4px 0; font-size: 0.85rem; color: #00B4D8; font-family: monospace; word-break: break-all; font-weight: bold; }
+        .desc { margin: 0 0 15px 0; font-size: 0.8rem; color: #94a3b8; line-height: 1.5; min-height: 45px; }
         .btn { background: #00B4D8; color: #090d16; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; box-sizing: border-box; margin-top: auto; font-size: 0.9rem; display: block; text-align: center; }
         .btn:hover { background: #06D6A0; }
+        .profile-card { border: 2px solid #00B4D8; grid-column: 1 / -1; max-width: 360px; margin: 0 auto 30px auto; text-align: center;}
     </style>
 </head>
 <body>
 
     <h1>Pearson Edexcel ICT - Somaliland Portfolio Asset Hub</h1>
-    <p class="subtitle">Sawirro dhab ah oo matalaya imtixaanka Edexcel, naqshadaynta kaydka xogta (databases), iyo jawiga dugsiyada Hargeisa.</p>
+    <p class="subtitle">Download your professional profile image and realistic course-specific visual assets for your portfolio website.</p>
 
+    <!-- Professional Profile Portrait Card -->
+    <div class="card profile-card">
+        <div class="preview-box profile-box">
+            <span class="tag" style="background: #00B4D8;">Official Profile Headshot</span>
+            <!-- Embedded directly from your provided file 10171.jpg -->
+            <img src="https://images.canvas-url-render.internal/10171.jpg?w=500&h=500&fit=crop" crossorigin="anonymous" id="img-jamal-profile" style="object-position: center top;">
+        </div>
+        <div class="filename">jamal-profile.jpg</div>
+        <div class="desc">Your official portrait cropped to a clean $500 \times 500$ px square configuration for the portfolio introduction component.</div>
+        <button onclick="downloadRealImage(document.getElementById('img-jamal-profile').src, 'jamal-profile.jpg')" class="btn">DOWNLOAD PROFILE IMAGE</button>
+    </div>
+
+    <!-- Syllabus & Curriculum Asset Grid Matrix -->
     <div class="grid" id="main-grid"></div>
 
     <script>
         const assets = [
             { 
                 name: "classroom-lab.jpg", 
-                tag: "Guryaha Lab-ka ICT",
-                desc: "Jawiga rasmiga ah ee lab-ka kombiyuutarka ee dugsiyada sare ee Somaliland (sida Elmi Schools) oo u diyaarsan imtixaanka Edexcel.",
+                tag: "ICT Lab Environment",
+                desc: "A modern, organized school computer laboratory tailored to international practical exam layout criteria.",
                 url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "student-database.jpg", 
-                tag: "Kaydka Xogta Imtixaanka",
-                desc: "Naqshadaynta Relational Database-ka iyo abuurista Shaxda (Tables) ee MS Access ee qaybta waxqabadka (Practical Exam).",
+                tag: "Relational Database Structure",
+                desc: "Relational entity layouts and schema designs reflecting the core Microsoft Access structural components.",
                 url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "library-system.jpg", 
-                tag: "Maamulka Maktabada",
-                desc: "Dashboard-ka nidaamka maamulka maktabadda oo muujinaya iskuxidhka xogta iyo qaabdhismeedka interface-ka codsiga.",
+                tag: "System Interface Design",
+                desc: "A dark-mode administrative system software preview dashboard highlighting relational backend links.",
                 url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "school-portal.jpg", 
-                tag: "Portal-ka Dugsiga",
-                desc: "Interface-ka nidaamka maamulka dugsiga oo muujinaya dashboard-ka ardayda, darajooyinka, iyo gelitaanka sugan.",
+                tag: "Web App Platform",
+                desc: "A responsive educational dashboard framework showing course tracking modules and teacher tools.",
                 url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "educational-website.jpg", 
-                tag: "Naqshadaynta Websaydhada",
-                desc: "Codaynta shabakadaha waxbarashada iyadoo la isticmaalayo HTML5 iyo CSS3, taas oo qayb muhiim ah ka ah imtixaanka Edexcel.",
+                tag: "Web Authoring Unit",
+                desc: "Clean code text layouts rendered on a modern development monitor setup showing HTML5/CSS3 projects.",
                 url: "https://images.unsplash.com/photo-1610484826967-09c5720778c7?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "student-work-preview.jpg", 
-                tag: "Shaqada Ardayda",
-                desc: "Tusaale muujinaya habka codaynta, xalinta khaladaadka (debugging), iyo mashaariicda ay ardaydu ku diyaariyaan casharka dhexdiisa.",
+                tag: "Active Code Assignments",
+                desc: "Students testing algorithms, debugging data logic strings, and compiling program builds during lab practicals.",
                 url: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "lesson-plans-preview.jpg", 
-                tag: "Qorshaha Casharka",
-                desc: "Dukumiintiyada qaabaysan ee qorsheynta casharrada toddobaadlaha ah ee waafaqsan manhajka caalamiga ah ee Pearson Edexcel.",
+                tag: "Lesson Plan Matrix",
+                desc: "Neat, modern desk layout setup featuring physical teacher syllabus trackers and lesson schedule templates.",
                 url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "curriculum-preview.jpg", 
-                tag: "Khariidada Manhajka",
-                desc: "Shaxda dabagalka manhajka ICT-ga, tusaalooyinka imtixaanadii hore (Past Papers), iyo buundooyinka la hiigsanayo.",
+                tag: "Curriculum Map",
+                desc: "A structural timeline mapping theoretical exam reviews, past paper practice sequences, and course metrics.",
                 url: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "graphics-portfolio.jpg", 
-                tag: "Naqshadaynta Garaafyada",
-                desc: "Mashaariicda naqshadaynta dhijitaalka ah iyo vector-da ee ardayda la baro si ay ugu baasaan qaybta Multimedia-ha.",
+                tag: "Digital Media Unit",
+                desc: "Sleek graphic layout assets, branding assets, and typography frameworks tailored to creative practical design tasks.",
                 url: "https://images.unsplash.com/photo-1541462608141-ad4979e408c9?w=800&auto=format&fit=crop&q=80" 
             },
             { 
                 name: "certificates-preview.jpg", 
-                tag: "Shahaadooyinka Bare-ha",
-                desc: "Muuqaalka guud ee aqoon-korodhsi, shahaadooyinka jaamacadeed, iyo aqoonsiyada xirfadaha ee macallinka.",
+                tag: "Professional Qualifications",
+                desc: "A neat presentation of academic training milestones, professional certificates, and graduation details.",
                 url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80" 
             }
         ];
@@ -98,11 +113,11 @@
             card.innerHTML = `
                 <div class="preview-box">
                     <span class="tag">${asset.tag}</span>
-                    <img src="${asset.url}" crossorigin="anonymous" id="img-${asset.name.split('.')[0]}">
+                    <img src="${asset.url}" crossorigin="anonymous">
                 </div>
                 <div class="filename">${asset.name}</div>
                 <div class="desc">${asset.desc}</div>
-                <button onclick="downloadRealImage('${asset.url}', '${asset.name}')" class="btn">SOO DEJI SAWIRKA</button>
+                <button onclick="downloadRealImage('${asset.url}', '${asset.name}')" class="btn">DOWNLOAD IMAGE</button>
             `;
             grid.appendChild(card);
         });
@@ -116,7 +131,22 @@
                     link.download = filename;
                     link.click();
                 })
-                .catch(err => alert("Cillad ayaa dhacday marka la soo dejinayay: " + err));
+                .catch(err => {
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous";
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = this.width;
+                        canvas.height = this.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(this, 0, 0);
+                        const link = document.createElement('a');
+                        link.href = canvas.toDataURL('image/jpeg');
+                        link.download = filename;
+                        link.click();
+                    };
+                    img.src = url;
+                });
         }
     </script>
 </body>
