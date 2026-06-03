@@ -2,78 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>High-Visibility Asset Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Portfolio Asset Downloader</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #090d16; color: #f1f5f9; padding: 40px; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
-        .card { background: #131c2e; border: 2px solid #1e293b; border-radius: 15px; padding: 15px; }
-        .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border-radius: 8px; overflow: hidden; }
-        canvas { max-width: 100%; height: auto; border: 1px solid #334155; }
-        .btn { background: #00B4D8; color: #090d16; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; display: block; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #090d16; color: #f1f5f9; padding: 20px; text-align: center; }
+        h1 { color: #00B4D8; margin-bottom: 5px; font-size: 1.8rem; }
+        p { color: #94a3b8; margin-top: 0; margin-bottom: 30px; font-size: 0.9rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; }
+        .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 12px; border-radius: 6px; overflow: hidden; }
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .filename { margin: 8px 0; font-size: 0.85rem; color: #94a3b8; font-family: monospace; word-break: break-all; }
+        .btn { background: #00B4D8; color: #090d16; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; box-sizing: border-box; margin-top: auto; font-size: 0.9rem; display: block; }
         .btn:hover { background: #06D6A0; }
-        h3 { margin: 10px 0; font-size: 0.9rem; letter-spacing: 1px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
-    <h1>Portfolio Image Asset Preview</h1>
-    <p>If the boxes below are not blank, click "Download" to save the file.</p>
+    <h1>Realistic Portfolio Image Downloader</h1>
+    <p>Real stock photos matched to your ICT curriculum. Click "DOWNLOAD" to save them directly to your device.</p>
 
     <div class="grid" id="main-grid"></div>
 
     <script>
+        // High-quality uncopyrighted tech photos mapped to your exact website filenames
         const assets = [
-            { name: "jamal-profile.jpg", w: 500, h: 500, color: "#00B4D8", txtColor: "#090d16" },
-            { name: "classroom-lab.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "school-portal.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "library-system.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "lesson-plans-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "student-work-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "certificates-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "curriculum-preview.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "student-database.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "educational-website.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" },
-            { name: "graphics-portfolio.jpg", w: 800, h: 500, color: "#1e293b", txtColor: "#ffffff" }
+            { name: "classroom-lab.jpg", url: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80" },
+            { name: "school-portal.jpg", url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80" },
+            { name: "library-system.jpg", url: "https://images.unsplash.com/photo-1468254095679-bbcba94a7086?w=800&auto=format&fit=crop&q=80" },
+            { name: "lesson-plans-preview.jpg", url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" },
+            { name: "student-work-preview.jpg", url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80" },
+            { name: "certificates-preview.jpg", url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80" },
+            { name: "curriculum-preview.jpg", url: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&auto=format&fit=crop&q=80" },
+            { name: "student-database.jpg", url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80" },
+            { name: "educational-website.jpg", url: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=80" },
+            { name: "graphics-portfolio.jpg", url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80" }
         ];
 
         const grid = document.getElementById('main-grid');
 
         assets.forEach(asset => {
-            // Create Canvas
-            const canvas = document.createElement('canvas');
-            canvas.width = asset.w;
-            canvas.height = asset.h;
-            const ctx = canvas.getContext('2d');
-
-            // Draw Background
-            ctx.fillStyle = asset.color;
-            ctx.fillRect(0, 0, asset.w, asset.h);
-
-            // Draw Pattern/Border so it's not "Blank"
-            ctx.strokeStyle = asset.txtColor;
-            ctx.lineWidth = 20;
-            ctx.strokeRect(0, 0, asset.w, asset.h);
-            
-            // Draw Large Label
-            ctx.fillStyle = asset.txtColor;
-            ctx.font = `bold ${asset.w / 10}px Arial`;
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(asset.name.split('.')[0].toUpperCase(), asset.w / 2, asset.h / 2);
-
-            // Create Card
-            const dataUrl = canvas.toDataURL('image/jpeg');
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
                 <div class="preview-box">
-                    <img src="${dataUrl}" style="width:100%">
+                    <img src="${asset.url}" crossorigin="anonymous" id="img-${asset.name.split('.')[0]}">
                 </div>
-                <h3>${asset.name}</h3>
-                <a href="${dataUrl}" download="${asset.name}" class="btn">DOWNLOAD FILE</a>
+                <div class="filename">${asset.name}</div>
+                <button onclick="downloadRealImage('${asset.url}', '${asset.name}')" class="btn">DOWNLOAD IMAGE</button>
             `;
             grid.appendChild(card);
         });
+
+        // Function to download the actual image stream securely
+        function downloadRealImage(url, filename) {
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = filename;
+                    link.click();
+                })
+                .catch(err => alert("Error downloading image: " + err));
+        }
     </script>
 </body>
 </html>
