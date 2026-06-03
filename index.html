@@ -3,80 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>East Africa & Somaliland Asset Downloader</title>
+    <title>Pearson Edexcel ICT Somaliland Asset Hub</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #090d16; color: #f1f5f9; padding: 20px; text-align: center; }
         h1 { color: #00B4D8; margin-bottom: 5px; font-size: 1.8rem; }
         p { color: #94a3b8; margin-top: 0; margin-bottom: 30px; font-size: 0.9rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; text-align: left; }
         .preview-box { width: 100%; height: 180px; background: #000; margin-bottom: 12px; border-radius: 6px; overflow: hidden; position: relative; }
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .tag { position: absolute; top: 8px; left: 8px; background: rgba(0, 180, 216, 0.85); color: #090d16; padding: 3px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; }
-        .filename { margin: 8px 0; font-size: 0.85rem; color: #94a3b8; font-family: monospace; word-break: break-all; }
-        .btn { background: #00B4D8; color: #090d16; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; box-sizing: border-box; margin-top: auto; font-size: 0.9rem; display: block; }
+        .tag { position: absolute; top: 8px; left: 8px; background: #06D6A0; color: #090d16; padding: 3px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; }
+        .filename { margin: 4px 0; font-size: 0.85rem; color: #00B4D8; font-family: monospace; word-break: break-all; font-weight: bold; }
+        .desc { margin: 0 0 15px 0; font-size: 0.8rem; color: #94a3b8; line-height: 1.4; min-height: 40px; }
+        .btn { background: #00B4D8; color: #090d16; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; box-sizing: border-box; margin-top: auto; font-size: 0.9rem; display: block; text-align: center; }
         .btn:hover { background: #06D6A0; }
     </style>
 </head>
 <body>
 
-    <h1>Somaliland & Kenya Regional Portfolio Image Downloader</h1>
-    <p>Realistic photography curated to reflect East African education, local environments, and specialized ICT coursework.</p>
+    <h1>Pearson Edexcel ICT - Somaliland Portfolio Asset Hub</h1>
+    <p>Curated realistic photography representing Edexcel practical exams, database architecture, network topologies, and local Hargeisa school settings.</p>
 
     <div class="grid" id="main-grid"></div>
 
     <script>
-        // High-quality imagery tailored specifically for your geographical and professional profile
         const assets = [
             { 
                 name: "classroom-lab.jpg", 
-                context: "East African Tech Lab",
+                tag: "Edexcel Lab Environment",
+                desc: "A bright, air-conditioned secondary school ICT computer lab setup matching Elmi Schools standard parameters.",
                 url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80" 
             },
             { 
-                name: "school-portal.jpg", 
-                context: "Modern Institutional Systems",
-                url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80" 
-            },
-            { 
-                name: "library-system.jpg", 
-                context: "Database UI Architecture",
-                url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" 
-            },
-            { 
-                name: "lesson-plans-preview.jpg", 
-                context: "Teacher Workspace",
-                url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&auto=format&fit=crop&q=80" 
-            },
-            { 
-                name: "student-work-preview.jpg", 
-                context: "Active Coding Assignments",
-                url: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=800&auto=format&fit=crop&q=80" 
-            },
-            { 
-                name: "certificates-preview.jpg", 
-                context: "Graduation & Credentials",
-                url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80" 
-            },
-            { 
-                name: "curriculum-preview.jpg", 
-                context: "Academic Material Setup",
-                url: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop&q=80" 
-            },
-            { 
                 name: "student-database.jpg", 
-                context: "Relational Data Models",
+                tag: "Database Practical Component",
+                desc: "Relational database structures, ERDs, and data management tracking layout mirroring MS Access exam tasks.",
                 url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80" 
             },
             { 
+                name: "library-system.jpg", 
+                tag: "System Software Design",
+                desc: "Data analytics dashboards and visual information interfaces representing functional business database logic.",
+                url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "school-portal.jpg", 
+                tag: "Web App Infrastructure",
+                desc: "A comprehensive web portal layout representing user authentication, school grading modules, and database links.",
+                url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
                 name: "educational-website.jpg", 
-                context: "E-Learning Resources",
+                tag: "Web Authoring Exam",
+                desc: "Clean desktop monitor displaying custom coded HTML5 and CSS3 web design structures for educational platforms.",
                 url: "https://images.unsplash.com/photo-1610484826967-09c5720778c7?w=800&auto=format&fit=crop&q=80" 
             },
             { 
+                name: "student-work-preview.jpg", 
+                tag: "Practical Classwork",
+                desc: "A focused student workspace tracking code script bugs and working out layout mockups dynamically.",
+                url: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "lesson-plans-preview.jpg", 
+                tag: "Edexcel Syllabus Mapping",
+                desc: "Structured lesson plan paperwork layout detailing active lab parameters and student criteria tracking.",
+                url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "curriculum-preview.jpg", 
+                tag: "Academic Coursework Scheme",
+                desc: "A professional curriculum map outlining theoretical and practical timelines for final assessments.",
+                url: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
                 name: "graphics-portfolio.jpg", 
-                context: "Digital Layout Design",
+                tag: "Digital Graphics Unit",
+                desc: "Creative vectors, brand layouts, and digital publications aligned with the creative multimedia practical exams.",
                 url: "https://images.unsplash.com/photo-1541462608141-ad4979e408c9?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "certificates-preview.jpg", 
+                tag: "Teacher Qualifications",
+                desc: "Academic verification context, professional certification, and university graduation milestones.",
+                url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "excel-sheets-preview.jpg", 
+                tag: "Spreadsheet Data Modelling",
+                desc: "Complex functions, VLOOKUP systems, and nested IF logical structures used in Edexcel Section B tests.",
+                url: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "networking-topology.jpg", 
+                tag: "Theory Unit: Networks",
+                desc: "Visual representation of Ethernet cables, local area routers, and WAN architectural connections for theory classes.",
+                url: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop&q=80" 
+            },
+            { 
+                name: "exam-revision-session.jpg", 
+                tag: "Past Paper Mock Sessions",
+                desc: "Students actively going through past questions and exam paper structures in a local review class setting.",
+                url: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&auto=format&fit=crop&q=80" 
             }
         ];
 
@@ -87,10 +115,11 @@
             card.className = 'card';
             card.innerHTML = `
                 <div class="preview-box">
-                    <span class="tag">${asset.context}</span>
+                    <span class="tag">${asset.tag}</span>
                     <img src="${asset.url}" crossorigin="anonymous" id="img-${asset.name.split('.')[0]}">
                 </div>
                 <div class="filename">${asset.name}</div>
+                <div class="desc">${asset.desc}</div>
                 <button onclick="downloadRealImage('${asset.url}', '${asset.name}')" class="btn">DOWNLOAD IMAGE</button>
             `;
             grid.appendChild(card);
