@@ -10,7 +10,7 @@
         .subtitle { color: #94a3b8; margin-top: 0; margin-bottom: 30px; font-size: 0.9rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
         .card { background: #131c2e; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; text-align: left; }
-        .preview-box { width: 100%; height: 200px; background: #000; margin-bottom: 12px; border-radius: 6px; overflow: hidden; position: relative; }
+        .preview-box { width: 100%; height: 200px; background: #020617; margin-bottom: 12px; border-radius: 6px; overflow: hidden; position: relative; }
         .preview-box.profile-box { height: 320px; } 
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .tag { position: absolute; top: 8px; left: 8px; background: #06D6A0; color: #090d16; padding: 3px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; }
@@ -24,17 +24,16 @@
 <body>
 
     <h1>Pearson Edexcel ICT - Somaliland Portfolio Asset Hub</h1>
-    <p class="subtitle">Your real, upgraded assets are ready. Verify names and layouts before pushing to GitHub Pages.</p>
+    <p class="subtitle">Your uploaded assets are compiled below using absolute file system references.</p>
 
     <!-- Professional Profile Portrait Card -->
     <div class="card profile-card">
         <div class="preview-box profile-box">
             <span class="tag" style="background: #00B4D8;">Official Profile Headshot</span>
-            <img src="assets/images/jamal-profile.jpg" onerror="this.src='https://images.canvas-url-render.internal/10171.jpg?w=500&h=500&fit=crop';" style="object-position: center top;">
+            <img src="10171.jpg" style="object-position: center top;">
         </div>
         <div class="filename">jamal-profile.jpg</div>
-        <div class="desc">Your official portrait cropped to a clean $500 \times 500\text{ px}$ square configuration.</div>
-        <div class="tag" style="position:relative; top:0; left:0; display:inline-block; margin-top:5px; background:#1e293b; color:#00B4D8; border:1px solid #00B4D8;">Source File: 10171.jpg</div>
+        <div class="desc">Your official portrait mapped straight from your file request.</div>
     </div>
 
     <!-- Main Project Grid -->
@@ -43,84 +42,74 @@
     <script>
         const assets = [
             { 
-                name: "classroom-lab.jpg", 
-                tag: "ICT Lab Environment",
-                desc: "Real image from your active lab environment showing secondary school students operating desktop workstations.",
-                localUrl: "assets/images/classroom-lab.jpg",
-                imgSource: "Image 9 (Student in headscarf working on desktop computer)",
+                name: "graphics-portfolio.jpg", 
+                tag: "Digital Media Unit",
+                desc: "A polished design booklet compilation highlighting editorial layout frameworks.",
+                sourceFile: "10458.jpg",
+                pos: "center center"
+            },
+            { 
+                name: "educational-website.jpg", 
+                tag: "Web Authoring Unit",
+                desc: "A presentation collection showcasing modern landing page layouts for online school systems.",
+                sourceFile: "10459.jpg",
                 pos: "center center"
             },
             { 
                 name: "student-database.jpg", 
                 tag: "Relational Database Structure",
-                desc: "Complete entity relational database diagram mapping out student tables, primary keys, and field logic structures.",
-                localUrl: "assets/images/student-database.jpg",
-                imgSource: "Image 3 (Student Database Schema blue/orange/green flowchart diagram)",
+                desc: "Complete entity relational database diagram mapping out student tables and primary key logic structures.",
+                sourceFile: "10462.jpg",
                 pos: "center center"
+            },
+            { 
+                name: "curriculum-preview.jpg", 
+                tag: "Curriculum Map",
+                desc: "The official textbook reference tracking syllabus deliverables for the International GCSE ICT course.",
+                sourceFile: "10463.png",
+                pos: "center top"
+            },
+            { 
+                name: "certificates-preview.jpg", 
+                tag: "Professional Qualifications",
+                desc: "A comprehensive learning management platform log of syllabus items and teacher tools.",
+                sourceFile: "10464.jpg",
+                pos: "left top"
+            },
+            { 
+                name: "lesson-plans-preview.jpg", 
+                tag: "Lesson Plan Matrix",
+                desc: "A structured, clean weekly teacher instruction layout tracking module activities.",
+                sourceFile: "10465.png",
+                pos: "center top"
             },
             { 
                 name: "library-system.jpg", 
                 tag: "System Interface Design",
-                desc: "Data Flow Diagram layout representing interactions between Admin, Librarian, Student, and the Library Backend.",
-                localUrl: "assets/images/library-system.jpg",
-                imgSource: "Image 7 (ELMS Application schematic flowchart map)",
+                desc: "Data Flow Diagram layout representing backend logic interactions for administrative software applications.",
+                sourceFile: "10466.jpg",
                 pos: "center center"
             },
             { 
                 name: "school-portal.jpg", 
                 tag: "Web App Platform",
-                desc: "The authentic online identity header featuring the crest, banner link accents, and portal paths.",
-                localUrl: "assets/images/school-portal.jpg",
-                imgSource: "Image 8 (Elm Schools website banner component with green/blue tabs)",
+                desc: "The authentic online identity header featuring the school crest, banner accents, and portal paths.",
+                sourceFile: "10467.png",
                 pos: "left top"
             },
             { 
-                name: "educational-website.jpg", 
-                tag: "Web Authoring Unit",
-                desc: "A clean UI workspace presentation collection showcasing landing page layouts for online school web systems.",
-                localUrl: "assets/images/educational-website.jpg",
-                imgSource: "Image 2 (The Best Website Template Collection for Educational Websites mockup)",
+                name: "classroom-lab.jpg", 
+                tag: "ICT Lab Environment",
+                desc: "Real image from your active lab environment showing secondary school students operating desktop workstations.",
+                sourceFile: "10468.jpg",
                 pos: "center center"
             },
             { 
                 name: "student-work-preview.jpg", 
                 tag: "Active Code Assignments",
                 desc: "Real-world infrastructure panel overview highlighting modern server connection matrix clusters.",
-                localUrl: "assets/images/student-work-preview.jpg",
-                imgSource: "Image 10 (Ethernet network server patch panel close-up view)",
+                sourceFile: "10469.webp",
                 pos: "center center"
-            },
-            { 
-                name: "lesson-plans-preview.jpg", 
-                tag: "Lesson Plan Matrix",
-                desc: "A structured, clean weekly teacher instruction layout planning module tasks, activities, and curriculum timelines.",
-                localUrl: "assets/images/lesson-plans-preview.jpg",
-                imgSource: "Image 6 (Weekly Planning Template spreadsheet layout grid document)",
-                pos: "center top"
-            },
-            { 
-                name: "curriculum-preview.jpg", 
-                tag: "Curriculum Map",
-                desc: "The official textbook reference tracking syllabus deliverables for the International GCSE (9–1) course track.",
-                localUrl: "assets/images/curriculum-preview.jpg",
-                imgSource: "Image 4 (Pearson Edexcel International GCSE ICT Student Book cover page)",
-                pos: "center top"
-            },
-            { 
-                name: "graphics-portfolio.jpg", 
-                tag: "Digital Media Unit",
-                desc: "A stylized design booklet outline compilation highlighting editorial layout frameworks and print layouts.",
-                localUrl: "assets/images/graphics-portfolio.jpg",
-                imgSource: "Image 1 (Graphic Design Portfolio book mockup spread display page)",
-                pos: "center center"
-            },
-            { 
-                name: "certificates-preview.jpg", 
-                tag: "Professional Qualifications",
-                desc: "A comprehensive learning management dashboard map logging complete syllabus items, grades, and resources.",
-                localUrl: "assets/images/certificates-preview.jpg",
-                imgSource: "Image 5 (Documentation Course online portal dashboard system dashboard interface)",
-                pos: "left top"
             }
         ];
 
@@ -132,12 +121,12 @@
             card.innerHTML = `
                 <div class="preview-box">
                     <span class="tag">${asset.tag}</span>
-                    <img src="${asset.localUrl}" style="object-position: ${asset.pos};" alt="[Missing local asset: ${asset.name}]">
+                    <img src="${asset.sourceFile}" style="object-position: ${asset.pos};" alt="[Error loading ${asset.sourceFile}]">
                 </div>
-                <div class="filename">${asset.name}</div>
+                <div class="filename" style="color: #06D6A0;">→ Rename to: ${asset.name}</div>
                 <div class="desc">${asset.desc}</div>
-                <div style="font-size:0.7rem; color:#64748b; margin-top:auto; font-family:sans-serif; border-top:1px solid #1e293b; padding-top:6px;">
-                    <strong>Source:</strong> ${asset.imgSource}
+                <div style="font-size:0.75rem; color:#64748b; margin-top:auto; font-family:monospace; border-top:1px solid #1e293b; padding-top:6px;">
+                    Current file: ${asset.sourceFile}
                 </div>
             `;
             grid.appendChild(card);
